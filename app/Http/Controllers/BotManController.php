@@ -25,18 +25,23 @@ class BotManController extends Controller
 
     public function askName($botman)
     {
-        $botman->ask('Hello! What is your Name?', function(Answer $answer) use ($botman) {
+        $botman->ask('Hello! What is your Name?', function(Answer $answer, $botman) {
             $name = $answer->getText();
             Log::info('Answer received: ' . $name);
 
             try {
-                $botman->say('Nice to meet you ' . $name, $botman->getMessage()->getSender());
+
+                $botman->say('Nice to meet you ' . $name);
+
                 Log::info('Reply sent successfully.');
+
             } catch (\Exception $e) {
                 Log::error('Error sending reply: ' . $e->getMessage());
             }
         });
     }
+
+    
 
 
 }

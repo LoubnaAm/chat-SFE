@@ -148,7 +148,17 @@
             introMessage: "Hello there! I'm your chatbot for today."
         };
     </script>
-   
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            setTimeout(function() {
+                botmanChatWidget.sayAsBot('This is an automated message that appears after 2 seconds of loading the page!');
+            }, 2000);
+        });
+    </script>
+
+    
     <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
        
 
