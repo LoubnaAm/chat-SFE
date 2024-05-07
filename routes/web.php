@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\BotManController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +37,7 @@ require __DIR__.'/adminauth.php';
 Route::get('/admin/dashboard', function () {
     return view('admin.auth.dashboard');
 })->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
+/*=============================Users Route======================================*/
 Route::get('/admin/users', function () {
     return view('admin.users');
 })->name('admin.users');
@@ -46,4 +50,9 @@ Route::get('/admin/rating', function () {
 Route::get('/admin/password', function () {
     return view('admin.password');
 })->name('admin.password');
-
+Route::get('/fetch-users', [UsersController::class, 'fetchUsers']);
+Route::delete('/delete-user/{id}', [UsersController::class, 'deleteUser'])->name('delete.user');
+Route::get('/infos/user/modal/{id}',[UsersController::class, 'create'])->name('infos.user.modal');
+Route::get('/filter-users',[UsersController::class,'filterUsers'])->name('filter.users');
+/*=============================Users Route======================================*/
+Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle'])->withoutMiddleware([VerifyCsrfToken::class]);

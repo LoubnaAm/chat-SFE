@@ -129,4 +129,32 @@
             </div>
         </div>
     </body>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
+    <script>
+        var botmanWidget = {
+            chatServer: '/botman',  // Endpoint where BotMan listens
+            frameEndpoint: '/botman/chat', // Ensure this is correct
+            title: 'Chatbot',
+            mainColor: '#10A37F',
+            bubbleBackground: '#10A37F',
+
+            displayMessageTime: true,
+            aboutText: 'Start the conversation with Hi',
+            introMessage: "Hello there! I'm your chatbot for today."
+        };
+    </script>
+
+    <script>
+         document.addEventListener("DOMContentLoaded", function() {
+
+            setTimeout(function() {
+                //This is an automated message that appears after 2 seconds (2000ms) of loading the page
+                botmanChatWidget.sayAsBot('Say hi to start a conversation with me!');
+            }, 2000);
+                    });
+    </script>
+
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+
 </html>
