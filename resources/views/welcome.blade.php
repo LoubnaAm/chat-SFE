@@ -153,9 +153,41 @@
         document.addEventListener("DOMContentLoaded", function() {
 
             setTimeout(function() {
-                botmanChatWidget.sayAsBot('This is an automated message that appears after 2 seconds of loading the page!');
+                //This is an automated message that appears after 2 seconds (2000ms) of loading the page
+                botmanChatWidget.sayAsBot('Say hi to start a conversation with me!');
             }, 2000);
         });
+
+        
+        // Function to initialize the MutationObserver
+        function observeTextInput() {
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        // Check if the added node is the input element you're interested in
+                        if (node.id === 'userText' && node.tagName === 'INPUT') {
+                            node.setAttribute('autocomplete', 'off');
+                            console.log('Autocomplete attribute set to off!');
+                        }
+                    });
+                });
+            });
+
+            // Start observing the body for added nodes
+            observer.observe(document.body, {
+                childList: true, // observe direct children
+                subtree: true, // and lower descendants too
+                attributes: false
+            });
+
+            // Optional: Return the observer in case you need to disconnect it later
+            return observer;
+        }
+
+        // Call this function once during your script setup or after the page has loaded
+        observeTextInput();
+
+
     </script>
 
     

@@ -5,6 +5,7 @@ use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
+use App\Conversations\OnboardingConversation;
 
 use Illuminate\Support\Facades\Log;
 
@@ -16,10 +17,12 @@ class BotManController extends Controller
         $botman = app('botman');
 
         $botman->hears('{message}', function ($botman, $message) {
-            if ($message === 'hi' || $message === 'Hi' || $message === 'HI' || $message === 'hello' || $message === 'Hello' || $message === 'HELLO') {
-                $this->askName($botman);
-                //$this->askPurpose($botman);
-                //$this->askTest($botman);
+
+            // Simulate typing by adding a delay before sending a reply
+            $botman->typesAndWaits(2); // Simulate the bot is typing for 2 seconds
+
+            if (strtolower($message) === 'hi' || strtolower($message) === 'hello') {
+                $botman->startConversation(new OnboardingConversation);
             } else {
                 $botman->reply("Start a conversation by saying hi.");
             }
@@ -27,6 +30,7 @@ class BotManController extends Controller
 
         $botman->listen();
     }
+
 
 
     public function askName($botman)
