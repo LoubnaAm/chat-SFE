@@ -56,3 +56,4 @@ Route::get('/infos/user/modal/{id}',[UsersController::class, 'create'])->name('i
 Route::get('/filter-users',[UsersController::class,'filterUsers'])->name('filter.users');
 /*=============================ChatBot Route======================================*/
 Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle'])->withoutMiddleware([VerifyCsrfToken::class]);
+/*=============================test Route======================================*/
