@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Conversations;
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
@@ -49,10 +49,10 @@ class OnboardingConversation extends Conversation
                         1234 Innovation Drive
                         San Francisco, CA 94103
                         USA
-                        
+
                         Phone:
                         +1 (415) 789-4561
-                        
+
                         Email:
                         contact@technexsolutions.com");
                         break;
@@ -71,4 +71,4 @@ class OnboardingConversation extends Conversation
 }
 
 
-?> 
+?>
