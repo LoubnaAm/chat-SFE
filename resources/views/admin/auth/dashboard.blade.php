@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<h2>admin dashboard
+</h2>
+=======
 @extends('layouts.app')
 
 @section('content')
@@ -52,3 +56,4 @@
     </div>
 
 @endsection
+>>>>>>> 63bcfbe8ac249ae523a11dfcf71fc94214d22a52

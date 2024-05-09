@@ -1,11 +1,11 @@
 <?php
 
-
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BotManController;
+use App\Http\Middleware\VerifyCsrfToken;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,5 +54,5 @@ Route::get('/fetch-users', [UsersController::class, 'fetchUsers']);
 Route::delete('/delete-user/{id}', [UsersController::class, 'deleteUser'])->name('delete.user');
 Route::get('/infos/user/modal/{id}',[UsersController::class, 'create'])->name('infos.user.modal');
 Route::get('/filter-users',[UsersController::class,'filterUsers'])->name('filter.users');
-/*=============================Users Route======================================*/
+/*=============================ChatBot Route======================================*/
 Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle'])->withoutMiddleware([VerifyCsrfToken::class]);

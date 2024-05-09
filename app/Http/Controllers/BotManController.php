@@ -52,7 +52,6 @@ class BotManController extends Controller
         });
     }
 
-
     public function askPurpose($botman)
     {
         $question = Question::create("What would you like to know about our website?")
@@ -115,6 +114,5 @@ class BotManController extends Controller
             }
         });
     }
-
 
 }
