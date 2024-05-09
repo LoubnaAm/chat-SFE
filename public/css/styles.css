@@ -41,6 +41,7 @@ body {
   transition: 0.5s;
   overflow: hidden;
 }
+
 .navigation.active {
   width: 80px;
 }
@@ -120,9 +121,10 @@ body {
   box-shadow: 35px 35px 0 10px var(--white);
   pointer-events: none;
 }
+
 .navigation ul li:hover a::after,
 .navigation ul li.hovered a::after {
-  content: "";
+ content: "";
   position: absolute;
   right: 0;
   bottom: -50px;
@@ -159,7 +161,7 @@ body {
   left: 80px;
 }
 
-.topbar {
+.top {
   width: 80%;
   height: 60px;
   display: flex;
@@ -297,9 +299,9 @@ body {
     background-color: #f8f9fa;
     padding: 10px;
     border-bottom: 1px solid #dee2e6;
-    width:80%;
+    width:60%;
     border-radius: 10px;
-    margin-left: 80px;
+    /*margin-left: 80px;*/
     margin-top: 70px;
 }
 
@@ -345,12 +347,10 @@ body {
 .dropdown-menu .dropdown-item:hover {
     background-color: #f0f0f0;
 }
-/* ====================== Users ========================== */
-
 .table {
-    width: 80%;
+    width: 60%;
     border-collapse: collapse;
-    margin-left:80px;
+    /*margin-left:80px;*/
 
 }
 
@@ -374,13 +374,14 @@ body {
     background-color: #f9f9f9;
 }
 
-.table tbody tr:hover {
-    background-color: #f0f0f0;
+.table tbody tr.loubna:hover {
+    background-color: #000; /* Votre couleur de fond pour le survol */
 }
+
 /*.container-fluid {
-    border-left: 2px solid #ccc; /* Bordure à gauche /
-    border-radius: 10px; /* Bordure arrondie /
-    padding-left: 15px; /* Espace à gauche pour la bordure /
+    border-left: 2px solid #ccc;
+    border-radius: 10px;
+    padding-left: 15px;
 }*/
 .delete-icon {
 
@@ -395,30 +396,41 @@ body {
 .search-icon {
     width: 40px;
     height: 40px;
-    border-radius: 50%; 
-    background-color: dodgerblue; /* Couleur de fond du cercle */
+    border-radius: 50%;
+    background-color: dodgerblue;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .search-icon ion-icon {
-    color: white; /* Couleur de l'icône */
-    font-size: 20px; /* Taille de l'icône */
-    cursor: pointer; /* Curseur de la souris lorsqu'il survole l'icône */
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .search-icon:hover {
-    background-color: skyblue; /* Changer la couleur de fond lorsqu'il est survolé */
+    background-color: skyblue;
 }
 
 .search-icon ion-icon:hover {
     opacity: 0.7; /* Réduire légèrement l'opacité de l'icône lorsqu'elle est survolée */
 }
+.chart1 {
+    position: fixed;
+    top: 135px; /* Ajustez cette valeur pour positionner verticalement le graphique */
+    right: 10px; /* Ajustez cette valeur pour positionner horizontalement le graphique */
+    z-index: 999; /* Assurez-vous que le graphique reste au-dessus du contenu de la page */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white; /* Ajoutez une couleur de fond au besoin */
+}
 
 
 
 /* ====================== Responsive Design ========================== */
+
 @media (max-width: 991px) {
   .chartsBx{
     grid-template-columns: 1fr;
@@ -498,3 +510,4 @@ body {
 }
 
 }
+

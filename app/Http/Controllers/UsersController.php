@@ -26,8 +26,6 @@ class UsersController extends Controller
                 $user->status = 'Ancien';
             }
 
-            // Formatage de la date created_at
-            $user->created_at = Carbon::parse($user->created_at)->format('Y-m-d | H:i:s');
         }
 
         return response()->json(['users' => $users]);

@@ -7,7 +7,7 @@
             <h3 class="w-50 float-left card-title m-0">New Users</h3>
 
         </div>
-        <div class="row" style="margin-left:70px;">
+        <div class="row"  style="width:75%;">
             <div class="col-md-3">
                 <input type="text" id="filterName" class="form-control" placeholder="Nom">
             </div>
@@ -54,7 +54,9 @@
     <div class="row">
         <div class="col">
             <div id="summaryCharts" class="d-flex justify-content-between" style="margin-right: 0;">
-                <canvas id="statusChart" width="300" height="300"></canvas>
+                <div class="chart1">
+                <canvas id="statusChart" width="450" height="550"></canvas>
+                </div>
             </div>
         </div>
       @include('includes.modal')
