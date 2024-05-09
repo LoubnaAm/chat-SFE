@@ -48,10 +48,13 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+<<<<<<< HEAD
+=======
     public function logout(Request $request) {
         Auth::logout();
         $request->session()->invalidate();
         return redirect('/');
     }
 
+>>>>>>> 63bcfbe8ac249ae523a11dfcf71fc94214d22a52
 }
