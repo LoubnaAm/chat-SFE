@@ -13,6 +13,32 @@ function toggleTheme() {
     }
 }
 
+
+    let list = document.querySelectorAll(".navigation li");
+    //console.log("Navigation sélectionnée :", navigation);
+
+
+    list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+    function activeLink() {
+        console.log("Mouse over on navigation item");
+        list.forEach((item) => {
+            item.classList.remove("hovered");
+        });
+        this.classList.add("hovered");
+    }
+
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+
+    toggle.onclick = function () {
+        console.log("Toggle button clicked");
+        navigation.classList.toggle("active");
+        main.classList.toggle("active");
+    };
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const spinner = document.getElementById("spinner");
@@ -243,9 +269,6 @@ $(document).on('click', '#applyFilter', function() {
     });
 });
 document.addEventListener('DOMContentLoaded', function() {
-
-
-    // Données pour le deuxième diagramme (par exemple, le nombre d'utilisateurs dans chaque statut)
     const statusData = {
         labels: ['Nouveau', 'Récent', 'Ancien'],
         datasets: [{
@@ -257,21 +280,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }]
     };
 
-    // Configuration du deuxième diagramme
+
     const statusChartConfig = {
-        type: 'pie',
+        type: 'bar',
         data: statusData,
         options: {
-            responsive: false, // Empêche le graphique de s'adapter à la taille du conteneur
-            maintainAspectRatio: false, // Empêche le graphique de conserver son aspect ratio
-            width: 300,
-            height: 150
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true, //emplille les bar  horizontalement (x) et verticalement (y)
+                },
+                y: {
+                    stacked: true,
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Nombre d\'utilisateurs par statut'
+                }
+            }
         }
     };
 
-    // Création du deuxième diagramme
     const statusChartCanvas = document.getElementById('statusChart').getContext('2d');
     const statusChart = new Chart(statusChartCanvas, statusChartConfig);
 });
 
-
+document.querySelectorAll('.loubna').forEach(item => {
+    item.addEventListener('mouseover', () => {
+        console.log('Hover effect triggered!');
+        // Ajoutez ici le code pour appliquer le style de hover si nécessaire
+    });
+});
