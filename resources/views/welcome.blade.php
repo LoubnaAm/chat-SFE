@@ -158,34 +158,24 @@
         });
 
         
-        // Function to initialize the MutationObserver
-        function observeTextInput() {
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    mutation.addedNodes.forEach(function(node) {
-                        // Check if the added node is the input element you're interested in
-                        if (node.id === 'userText' && node.tagName === 'INPUT') {
-                            node.setAttribute('autocomplete', 'off');
-                            console.log('Autocomplete attribute set to off!');
+        document.addEventListener("DOMContentLoaded", function() {
+            function waitForIframeAndModifyInput(iframeId) {
+                var interval = setInterval(function() {
+                    var iframe = document.getElementById(iframeId);
+                    if (iframe && iframe.contentWindow && iframe.contentWindow.document) {
+                        var input = iframe.contentWindow.document.getElementById('userText');
+                        if (input) {
+                            input.setAttribute('autocomplete', 'off');
+                            console.log('Autocomplete attribute has been set to off for #userText.');
+                            clearInterval(interval); // Stop the interval once the input is modified
                         }
-                    });
-                });
-            });
+                    }
+                }, 500); // Check every 500 milliseconds for the iframe and input element
+            }
 
-            // Start observing the body for added nodes
-            observer.observe(document.body, {
-                childList: true, // observe direct children
-                subtree: true, // and lower descendants too
-                attributes: false
-            });
-
-            // Optional: Return the observer in case you need to disconnect it later
-            return observer;
-        }
-
-        // Call this function once during your script setup or after the page has loaded
-        observeTextInput();
-
+            // Wait for the iframe to load and then modify the input
+            waitForIframeAndModifyInput('chatBotManFrame'); // This is the correct iframe ID from your HTML
+        });
 
     </script>
 
