@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Conversations;
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
@@ -8,67 +9,90 @@ use BotMan\BotMan\Messages\Incoming\Answer;
 
 class OnboardingConversation extends Conversation
 {
-    protected $firstname;
-
-    public function askName()
+    public function askForPath()
     {
-        $this->ask('Hello! What is your Name?', function(Answer $answer) {
-            // Simulate delay by chaining the next question
-            $this->bot->typesAndWaits(2); // Simulate typing delay
-
-            $this->firstname = $answer->getText();
-            $this->say('Nice to meet you '.$this->firstname);
-
-            // Simulate delay by chaining the next question
-            $this->bot->typesAndWaits(2); // Simulate typing delay
-            $this->askPurpose();
-        });
-    }
-
-    public function askPurpose()
-    {
-        $question = Question::create("What would you like to know about our website?")
+        $question = Question::create("Hello there! I'm the TechGuru Assistant. How can I assist you today? 😊")
             ->fallback('Unable to ask question')
-            ->callbackId('ask_purpose')
+            ->callbackId('ask_path')
             ->addButtons([
-                Button::create('About Us')->value('about'),
-                Button::create('Contact Info')->value('contact'),
-                Button::create('Services')->value('services')
+                Button::create('Browse Services')->value('services'),
+                Button::create('Support')->value('support'),
+                Button::create('Company Info')->value('info')
             ]);
 
         $this->ask($question, function (Answer $answer) {
-            if ($answer->isInteractiveMessageReply()) {
-                $value = $answer->getValue();
-                switch ($value) {
-                    case 'about':
-                        $this->say("Welcome to TechNex Solutions, where we commit ourselves to delivering excellence in digital transformation and IT consultancy. Founded in 2012 by Alice Thompson, our company has grown from a passionate venture into a trusted leader in the technology sector. Based in San Francisco, California, we pride ourselves on our innovative approach to solving complex problems and our dedication to client satisfaction.");
-                        break;
-                    case 'contact':
-                        $this->say("Address:
-                        TechNex Solutions
-                        1234 Innovation Drive
-                        San Francisco, CA 94103
-                        USA
+            $this->handlePathResponse($answer);
+        });
+    }
 
-                        Phone:
-                        +1 (415) 789-4561
-
-                        Email:
-                        contact@technexsolutions.com");
-                        break;
-                    case 'services':
-                        $this->say("From desktop applications to modern mobile apps, our team has the expertise to build software tailored to your business needs. We utilize the latest technologies to craft systems that are robust, scalable, and secure.");
-                        break;
-                }
+    public function handlePathResponse(Answer $answer)
+    {
+        if ($answer->isInteractiveMessageReply()) {
+            switch ($answer->getValue()) {
+                case 'services':
+                    $this->askServices();
+                    break;
+                case 'support':
+                    $this->askSupport();
+                    break;
+                case 'info':
+                    $this->askCompanyInfo();
+                    break;
             }
+        }
+    }
+
+
+    public function askServices()
+    {
+        $question = Question::create("We offer a range of IT solutions. What are you interested in?")
+            ->fallback('Unable to ask question')
+            ->callbackId('ask_services')
+            ->addButtons([
+                Button::create('Cloud Services')->value('cloud'),
+                Button::create('IT Security')->value('security'),
+                Button::create('Software Development')->value('software')
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            // Further response handling here...
+        });
+    }
+
+    public function askSupport()
+    {
+        $question = Question::create("I'm here to help! What support do you need?")
+            ->fallback('Unable to ask question')
+            ->callbackId('ask_support')
+            ->addButtons([
+                Button::create('Troubleshooting')->value('troubleshooting'),
+                Button::create('Talk to Support')->value('talk_to_support'),
+                Button::create('Billing and Accounts')->value('billing')
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            // Further response handling here...
+        });
+    }
+
+    public function askCompanyInfo()
+    {
+        $question = Question::create("Want to know more about us? What are you interested in?")
+            ->fallback('Unable to ask question')
+            ->callbackId('ask_info')
+            ->addButtons([
+                Button::create('About Us')->value('about_us'),
+                Button::create('Careers')->value('careers'),
+                Button::create('Contact Info')->value('contact_info')
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            // Further response handling here...
         });
     }
 
     public function run()
     {
-        $this->askName();
+        $this->askForPath();
     }
 }
-
-
-?>
